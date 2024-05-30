@@ -1,4 +1,8 @@
 # This is Git's per-user configuration file.
+
+[core]
+	pager = less -F
+
 [user]
 	name = Juha Ruistola
 	email = juha.ruistola@metaplay.io
