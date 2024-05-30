@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Juha Ruistola
+	email = juha.ruistola@metaplay.io
+
+[alias]
+	co = checkout
+	st = status
+	lol = log --oneline
