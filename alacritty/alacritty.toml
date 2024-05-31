@@ -213,6 +213,6 @@ lines = 30
 x = 2
 y = 2
 
-# [shell]
-# program = "/bin/zsh"
-# args = ["--login", "-c", "tmux a -t base || tmux new -s base"]
+[shell]
+program = "/bin/zsh"
+args = ["--login", "-c", "tmux a -t base || tmux new -s base"]
