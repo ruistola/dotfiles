@@ -520,8 +520,22 @@ local servers = {
 
 	lua_ls = {
 		Lua = {
-			workspace = { checkThirdParty = false },
-			telemetry = { enable = false },
+			runtime = {
+				version = 'LuaJIT',
+			},
+			diagnostics = {
+				globals = {
+					'vim',
+					'require',
+				},
+			},
+			workspace = {
+				Library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+			telemetry = {
+				enable = false,
+			},
 		},
 	},
 }
@@ -653,7 +667,9 @@ require("nvim-tree").setup({
 		sorter = "case_sensitive",
 	},
 	view = {
-		width = 30,
+		width = {
+			min = 30,
+		},
 	},
 	renderer = {
 		group_empty = true,
