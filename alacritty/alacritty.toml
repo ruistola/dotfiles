@@ -1,3 +1,5 @@
+live_config_reload = true
+
 [colors.bright]
 black = "#928374"
 blue = "#83a598"
@@ -194,25 +196,22 @@ action = "ToggleFullscreen"
 key = "F"
 mods = "Command|Control"
 
-# [mouse.url.launcher]
-# program = "open"
+[mouse]
+hide_when_typing = true
 
 [scrolling]
 history = 10000
 
 [window]
-decorations = "Buttonless"
+decorations = "Transparent"
+opacity = 0.80
+blur = true
+dimensions = { columns = 90, lines = 30 }
+padding = { x = 0, y = 0 }
 dynamic_padding = false
-startup_mode = "Windowed"
+startup_mode = "Maximized"
+dynamic_title = true
 # option_as_alt = "Both"
-
-[window.dimensions]
-columns = 90
-lines = 30
-
-[window.padding]
-x = 2
-y = 2
 
 [shell]
 program = "/bin/zsh"

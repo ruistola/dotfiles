@@ -28,7 +28,7 @@ yabai -m config                                 \
     active_window_opacity        1.0            \
     normal_window_opacity        1.0            \
     window_opacity               off            \
-    window_border                on             \
+    window_border                off            \
     window_border_width          04             \
     active_window_border_topmost on             \
     active_window_border_color   0xffffaf5f     \
