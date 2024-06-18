@@ -83,25 +83,6 @@ require("lazy").setup({
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			"folke/neodev.nvim",
-		},
-	},
-
-	{
-		-- Autocompletion
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-
-			-- Adds LSP completion capabilities
-			"hrsh7th/cmp-nvim-lsp",
-
-			-- Adds a number of user-friendly snippets
-			"rafamadriz/friendly-snippets",
 		},
 	},
 
@@ -210,6 +191,54 @@ require("lazy").setup({
 
 	{
 		"wavded/vim-stylus",
+	},
+
+	{
+		"mfussenegger/nvim-dap",
+	},
+
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-neotest/nvim-nio"
+		},
+	},
+
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+
+	{ -- optional completion source for require statements and module annotations
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			-- Snippet Engine & its associated nvim-cmp source
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+
+			-- Adds LSP completion capabilities
+			"hrsh7th/cmp-nvim-lsp",
+
+			-- Adds a number of user-friendly snippets
+			"rafamadriz/friendly-snippets",
+		},
+		opts = function(_, opts)
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
+		end,
 	},
 
 	-- JRu addition: Colorscheme (none of that onedark shit)
@@ -543,9 +572,6 @@ local servers = {
 	},
 }
 
--- Setup neovim lua configuration
-require("neodev").setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -713,3 +739,51 @@ require("lspconfig").volar.setup({
 	-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 })
 
+-- DAP
+
+require("dapui").setup()
+
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
+
+dap.adapters.vstuc = {
+  type = 'executable',
+  command = '/opt/homebrew/bin/mono',
+  args = {'/Users/ruistola/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.2/bin/UnityDebugAdapter.dll'}
+}
+
+dap.adapters.coreclr = {
+  type = 'executable',
+  command = '/usr/local/bin/netcoredbg/netcoredbg',
+  args = {'--interpreter=vscode'}
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+}
+
+dap.configurations.cs = {
+  {
+  type = 'vstuc',
+  request = 'attach',
+  name = 'Unity Editor',
+  }
+}
