@@ -191,6 +191,8 @@ require("lazy").setup({
 		"wavded/vim-stylus",
 	},
 
+	-- Debugger
+
 	{
 		"mfussenegger/nvim-dap",
 	},
@@ -279,6 +281,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.fixeol = true
 vim.api.nvim_set_hl(0, "MatchParen", { bold = true, bg = "none", fg = "#ffaf5f" })
+vim.api.nvim_set_hl(0, "Visual", { bold = false, bg = "#ffaf5f", fg = "#1c1c1c" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
@@ -890,7 +893,7 @@ require("oil").setup({
 })
 
 -- oil.nvim shortcut
-vim.keymap.set("n", "<leader>-", require("oil").open, { desc = "[-] Toggle File Explorer" })
+vim.keymap.set("n", "<leader>-", require("oil").open, { desc = "File Explorer" })
 
 -- Required maybe for Vue support?
 require('lspconfig').tsserver.setup{
