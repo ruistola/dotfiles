@@ -282,6 +282,7 @@ vim.opt.expandtab = true
 vim.opt.fixeol = true
 vim.api.nvim_set_hl(0, "MatchParen", { bold = true, bg = "none", fg = "#ffaf5f" })
 vim.api.nvim_set_hl(0, "Visual", { bold = false, bg = "#ffaf5f", fg = "#1c1c1c" })
+-- vim.api.nvim_set_hl(0, "CursorLine", { bold = false, bg = "#ffaf5f", fg = "none" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
