@@ -1,5 +1,29 @@
 live_config_reload = true
 
+[window]
+decorations = "Buttonless"
+opacity = 0.60
+blur = true
+dimensions = { columns = 90, lines = 30 }
+padding = { x = 0, y = 0 }
+dynamic_padding = false
+startup_mode = "Maximized"
+dynamic_title = true
+# option_as_alt = "Both"
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = true
+
+[scrolling]
+history = 10000
+
+[shell]
+program = "/bin/zsh"
+args = ["--login", "-c", "tmux a -t base || tmux new -s base"]
+
 [colors.bright]
 black = "#928374"
 blue = "#83a598"
@@ -195,24 +219,3 @@ mods = "Command"
 action = "ToggleFullscreen"
 key = "F"
 mods = "Command|Control"
-
-[mouse]
-hide_when_typing = true
-
-[scrolling]
-history = 10000
-
-[window]
-decorations = "Transparent"
-opacity = 0.80
-blur = true
-dimensions = { columns = 90, lines = 30 }
-padding = { x = 0, y = 0 }
-dynamic_padding = false
-startup_mode = "Maximized"
-dynamic_title = true
-# option_as_alt = "Both"
-
-[shell]
-program = "/bin/zsh"
-args = ["--login", "-c", "tmux a -t base || tmux new -s base"]
