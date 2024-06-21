@@ -242,15 +242,14 @@ require("lazy").setup({
 	},
 
 	-- JRu addition: Colorscheme (none of that onedark shit)
-	--[[
-	  {
-	    'savq/melange-nvim',
-	    priority = 1000,
-	    config = function()
-	      vim.cmd.colorscheme 'melange'
-	    end,
-	  },
-	--]]
+
+	  -- {
+	  --   'savq/melange-nvim',
+	  --   priority = 1000,
+	  --   config = function()
+	  --     vim.cmd.colorscheme 'melange'
+	  --   end,
+	  -- },
 
 	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
 	--       These are some example plugins that I've included in the kickstart repository.
@@ -283,6 +282,8 @@ vim.opt.fixeol = true
 vim.api.nvim_set_hl(0, "MatchParen", { bold = true, bg = "none", fg = "#ffaf5f" })
 vim.api.nvim_set_hl(0, "Visual", { bold = false, bg = "#ffaf5f", fg = "#1c1c1c" })
 -- vim.api.nvim_set_hl(0, "CursorLine", { bold = false, bg = "#ffaf5f", fg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
