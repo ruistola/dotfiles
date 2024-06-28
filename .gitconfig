@@ -11,5 +11,7 @@
 	co = checkout
 	st = status
 	lol = log --oneline
+	lol20 = log --oneline -n20
+	lol30 = log --oneline -n30
 [advice]
 	addIgnoredFile = false
