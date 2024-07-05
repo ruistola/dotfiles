@@ -3,7 +3,7 @@ live_config_reload = true
 [window]
 decorations = "Buttonless"
 opacity = 0.80
-blur = true
+blur = false
 dimensions = { columns = 90, lines = 30 }
 padding = { x = 0, y = 0 }
 dynamic_padding = false
