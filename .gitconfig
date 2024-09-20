@@ -8,7 +8,9 @@
     # light = true
 
 [delta]
-    side-by-side = true
+    features = line-numbers decorations
+    true-color = always
+    syntax-theme = Coldark-Dark
     navigate = true    # use n and N to move between diff sections
 
 [interactive]
