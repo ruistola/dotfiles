@@ -140,15 +140,18 @@ require("lazy").setup({
                 lualine_c = {
                     {
                         'filename',
+                        -- color = { fg = '#999999', gui='italic' },
+                        color = { fg = '#999999' },
                         file_status = true,      -- Displays file status (readonly status, modified status)
                         newfile_status = false,  -- Display new file status (new file means no write after created)
-                        path = 3,                -- 0: Just the filename
+                        path = 3,
+                        -- 0: Just the filename
                         -- 1: Relative path
                         -- 2: Absolute path
                         -- 3: Absolute path, with tilde as the home directory
                         -- 4: Filename and parent dir, with tilde as the home directory
 
-                        shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                        shorting_target = 45,    -- Shortens path to leave [value] amount of spaces in the window
                         -- for other components. (terrible name, any suggestions?)
                         symbols = {
                             modified = '[+]',      -- Text to show when the file is modified.
