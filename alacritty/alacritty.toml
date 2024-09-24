@@ -22,7 +22,7 @@ history = 10000
 
 [shell]
 program = "/bin/zsh"
-args = ["--login", "-c", "tmux a -t base || tmux new -s base"]
+args = ["--login", "-c", "tmux a -t tmux || tmux new -s tmux"]
 
 [colors.bright]
 black = "#928374"
