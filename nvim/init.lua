@@ -614,8 +614,8 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "<leader>gD", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "<leader>gd", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -809,42 +809,6 @@ require("ibl").setup({
     scope = { enabled = false },
 })
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-
--- [[ Configure nvim-tree ]]
-
--- require("nvim-tree").setup({
--- 	update_focused_file = {
--- 		enable = true,
--- 		update_cwd = true,
--- 		update_root = true,
--- 	},
--- 	actions = {
--- 		open_file = {
--- 			quit_on_open = true,
--- 		},
--- 	},
--- 	sort = {
--- 		sorter = "case_sensitive",
--- 	},
--- 	view = {
--- 		width = {
--- 			min = 30,
--- 		},
--- 	},
--- 	renderer = {
--- 		group_empty = true,
--- 	},
--- 	filters = {
--- 		dotfiles = false,
--- 	},
--- })
-
--- Nvim-tree shortcut
--- vim.keymap.set("n", "<leader>-", require("nvim-tree.api").tree.toggle, { desc = "[-] Toggle File Explorer" })
--- vim.g.nvim_tree_respect_buf_cwd = 1
-
 require("oil").setup({
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
     -- Set to false if you still want to use netrw.
@@ -876,7 +840,7 @@ require("oil").setup({
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
     delete_to_trash = true,
     -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
-    skip_confirm_for_simple_edits = false,
+    skip_confirm_for_simple_edits = true,
     -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
     -- (:help prompt_save_on_select_new_entry)
     prompt_save_on_select_new_entry = true,
