@@ -88,7 +88,11 @@ require("lazy").setup({
 	},
 
 	-- Useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {} },
+	{ "folke/which-key.nvim", opts = {
+		icons = {
+			mappings = false,
+		},
+	} },
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -146,7 +150,6 @@ require("lazy").setup({
 				lualine_c = {
 					{
 						"filename",
-						-- color = { fg = '#999999', gui='italic' },
 						color = { fg = "#999999" },
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
