@@ -170,7 +170,8 @@ require("lazy").setup({
 						},
 					},
 				},
-				lualine_x = { "encoding", "fileformat", "filetype" },
+				-- lualine_x = { "encoding", "fileformat", "filetype" },
+				lualine_x = { "filetype" },
 				lualine_y = {},
 			},
 		},
@@ -440,6 +441,14 @@ require("lazy").setup({
 		},
 	},
 
+	{
+		"RRethy/nvim-align",
+	},
+
+	{
+		"machakann/vim-swap",
+	},
+
 	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
 	--       These are some example plugins that I've included in the kickstart repository.
 	--       Uncomment any of the lines below to enable them.
@@ -569,6 +578,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- See `:help telescope` and `:help telescope.setup()`
 require("telescope").setup({
 	defaults = {
+		layout_strategy = "vertical",
+		layout_config = {
+			preview_cutoff = 0,
+			preview_height = 0.5,
+			vertical = {
+				width = { padding = 0 },
+				height = { padding = 0 },
+				prompt_position = "bottom",
+				preview_width = 1.0,
+			},
+		},
+		initial_mode = "normal",
 		path_display = {
 			"truncate",
 		},
@@ -577,6 +598,15 @@ require("telescope").setup({
 				["<C-u>"] = false,
 				["<C-d>"] = false,
 			},
+		},
+		preview = {
+			timeout_ms = 3000,
+		},
+	},
+	pickers = {
+		buffers = {
+			-- ignore_current_buffer = true,
+			sort_lastused = true,
 		},
 	},
 })
@@ -609,7 +639,6 @@ require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"c",
 		"cpp",
-		"c_sharp",
 		"go",
 		"html",
 		"lua",
@@ -747,7 +776,6 @@ local servers = {
 	-- csharp_ls = {},
 	rust_analyzer = {},
 	-- omnisharp = {},
-	omnisharp_mono = {},
 	ts_ls = {},
 	volar = {},
 	terraformls = {},
@@ -1087,58 +1115,6 @@ require("lspconfig").ts_ls.setup({
 -- Vue
 require("lspconfig").volar.setup({
 	-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-})
-
--- C#
-
-require("lspconfig").omnisharp_mono.setup({
-	-- cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp-mono/omnisharp/Omnisharp.exe", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-	cmd = {
-		vim.fn.stdpath("data") .. "mason/packages/omnisharp-mono/omnisharp-mono",
-		"--languageserver",
-		"--hostPID",
-		tostring(vim.fn.getpid()),
-	},
-	-- cmd = { ".local/share/nvim/mason/packages/omnisharp-mono/run", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-	-- cmd = {"/opt/homebrew/Cellar/omnisharp-mono/1.35.3/bin/omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-	settings = {
-		FormattingOptions = {
-			-- Enables support for reading code style, naming convention and analyzer
-			-- settings from .editorconfig.
-			EnableEditorConfigSupport = true,
-			-- Specifies whether 'using' directives should be grouped and sorted during
-			-- document formatting.
-			OrganizeImports = nil,
-		},
-		MsBuild = {
-			-- If true, MSBuild project system will only load projects for files that
-			-- were opened in the editor. This setting is useful for big C# codebases
-			-- and allows for faster initialization of code navigation features only
-			-- for projects that are relevant to code that is being edited. With this
-			-- setting enabled OmniSharp may load fewer projects and may thus display
-			-- incomplete reference lists for symbols.
-			LoadProjectsOnDemand = nil,
-		},
-		RoslynExtensionsOptions = {
-			-- Enables support for roslyn analyzers, code fixes and rulesets.
-			EnableAnalyzersSupport = nil,
-			-- Enables support for showing unimported types and unimported extension
-			-- methods in completion lists. When committed, the appropriate using
-			-- directive will be added at the top of the current file. This option can
-			-- have a negative impact on initial completion responsiveness,
-			-- particularly for the first few completion sessions after opening a
-			-- solution.
-			EnableImportCompletion = nil,
-			-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-			-- true
-			AnalyzeOpenDocumentsOnly = nil,
-		},
-		Sdk = {
-			-- Specifies whether to include preview versions of the .NET SDK when
-			-- determining which version to use for project loading.
-			IncludePrereleases = true,
-		},
-	},
 })
 
 -- DAP
