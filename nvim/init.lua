@@ -578,15 +578,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- See `:help telescope` and `:help telescope.setup()`
 require("telescope").setup({
 	defaults = {
+		sorting_strategy = "ascending",
 		layout_strategy = "vertical",
 		layout_config = {
-			preview_cutoff = 0,
-			preview_height = 0.5,
 			vertical = {
 				width = { padding = 0 },
 				height = { padding = 0 },
-				prompt_position = "bottom",
+				prompt_position = "top",
+				preview_cutoff = 0,
+				preview_height = 0.5,
 				preview_width = 1.0,
+				mirror = true,
 			},
 		},
 		initial_mode = "normal",
@@ -606,7 +608,7 @@ require("telescope").setup({
 	pickers = {
 		buffers = {
 			-- ignore_current_buffer = true,
-			sort_lastused = true,
+			sort_mru = true,
 		},
 	},
 })
