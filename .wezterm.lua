@@ -23,7 +23,7 @@ config.scrollback_lines = 9999
 config.treat_left_ctrlalt_as_altgr = true
 
 config.font = wezterm.font("SauceCodePro Nerd Font")
-config.font_size = 18
+config.font_size = 17
 
 config.check_for_updates = true
 config.check_for_updates_interval_seconds = 86400
