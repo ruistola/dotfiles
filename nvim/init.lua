@@ -1,42 +1,3 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-
-Kickstart.nvim is *not* a distribution.
-
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, understand
-  what your configuration is doing, and modify it to suit your needs.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-  And then you can explore or search through `:help lua-guide`
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
---]]
--- Set <space> as the leader key
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -47,8 +8,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -63,18 +22,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- Git related plugins
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
-	-- Detect tabstop and shiftwidth automatically
-	-- I disabled this because a) it was forcing 8 width indentation, b) I think LSP makes it obsolete(?)
-	-- "tpope/vim-sleuth",
-
-	-- NOTE: This is where your plugins related to LSP can be installed.
-	--  The configuration is done below. Search for lspconfig to find it below.
 	{
-		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
@@ -82,22 +33,24 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
 		},
 	},
 
 	-- Useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {
-		icons = {
-			mappings = false,
+	{
+		"folke/which-key.nvim",
+		opts = {
+			icons = {
+				mappings = false,
+			},
 		},
-	} },
+	},
+
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
-			-- See `:help gitsigns.txt`
 			signs = {
 				add = { text = "+" },
 				change = { text = "~" },
@@ -131,7 +84,6 @@ require("lazy").setup({
 	{
 		-- Set lualine as statusline
 		"nvim-lualine/lualine.nvim",
-		-- See `:help lualine.txt`
 		opts = {
 			options = {
 				icons_enabled = true,
@@ -151,22 +103,15 @@ require("lazy").setup({
 					{
 						"filename",
 						color = { fg = "#999999" },
-						file_status = true, -- Displays file status (readonly status, modified status)
-						newfile_status = false, -- Display new file status (new file means no write after created)
+						file_status = true,
+						newfile_status = false,
 						path = 3,
-						-- 0: Just the filename
-						-- 1: Relative path
-						-- 2: Absolute path
-						-- 3: Absolute path, with tilde as the home directory
-						-- 4: Filename and parent dir, with tilde as the home directory
-
-						shorting_target = 45, -- Shortens path to leave [value] amount of spaces in the window
-						-- for other components. (terrible name, any suggestions?)
+						shorting_target = 45,
 						symbols = {
-							modified = "[+]", -- Text to show when the file is modified.
-							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-							unnamed = "[No Name]", -- Text to show for unnamed buffers.
-							newfile = "[New]", -- Text to show for newly created file before first write
+							modified = "[+]",
+							readonly = "[-]",
+							unnamed = "[No Name]",
+							newfile = "[New]",
 						},
 					},
 				},
@@ -177,25 +122,11 @@ require("lazy").setup({
 		},
 	},
 
-	{
-		-- Add indentation guides even on blank lines
-		"lukas-reineke/indent-blankline.nvim",
-		-- Enable `lukas-reineke/indent-blankline.nvim`
-		-- See `:help indent_blankline.txt`
-		main = "ibl",
-		opts = {},
-	},
-
-	-- Fuzzy Finder (files, lsp, etc)
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
 
-	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
-	-- Only load if `make` is available. Make sure you have the system
-	-- requirements installed.
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		-- NOTE: If you are having trouble with this installation,
-		--       refer to the README for telescope-fzf-native for more instructions.
 		build = "make",
 		cond = function()
 			return vim.fn.executable("make") == 1
@@ -203,7 +134,6 @@ require("lazy").setup({
 	},
 
 	{
-		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -217,7 +147,6 @@ require("lazy").setup({
 	},
 
 	-- Vue/pug
-
 	{
 		"digitaltoad/vim-pug",
 	},
@@ -227,7 +156,6 @@ require("lazy").setup({
 	},
 
 	-- Debugger
-
 	{
 		"mfussenegger/nvim-dap",
 	},
@@ -254,26 +182,34 @@ require("lazy").setup({
 
 	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
-	{ -- optional completion source for require statements and module annotations
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
+	{
+		"saghen/blink.cmp",
+		lazy = false,
+		-- optional: provides snippets for the snippet source
+		dependencies = "rafamadriz/friendly-snippets",
+		version = "v0.*",
 
-			-- Adds LSP completion capabilities
-			"hrsh7th/cmp-nvim-lsp",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			highlight = { use_nvim_cmp_as_default = true },
+			nerd_font_variant = "normal",
+			trigger = { signature_help = { enabled = true } },
 
-			-- Adds a number of user-friendly snippets
-			"rafamadriz/friendly-snippets",
+			keymap = {
+				show = "<C-space>",
+				hide = "<C-e>",
+				accept = "<Enter>",
+				select_and_accept = {},
+				select_prev = "<S-Tab>",
+				select_next = "<Tab>",
+
+				show_documentation = "<C-space>",
+				hide_documentation = "<C-space>",
+				scroll_documentation_up = "<C-b>",
+				scroll_documentation_down = "<C-f>",
+			},
 		},
-		opts = function(_, opts)
-			opts.sources = opts.sources or {}
-			table.insert(opts.sources, {
-				name = "lazydev",
-				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-			})
-		end,
 	},
 
 	{
@@ -344,54 +280,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- {
-	-- 	"folke/flash.nvim",
-	-- 	event = "VeryLazy",
-	-- 	opts = {},
-	-- 	keys = {
-	-- 		{
-	-- 			"s",
-	-- 			mode = { "n", "x", "o" },
-	-- 			function()
-	-- 				require("flash").jump()
-	-- 			end,
-	-- 			desc = "Flash",
-	-- 		},
-	-- 		{
-	-- 			"S",
-	-- 			mode = { "n", "x", "o" },
-	-- 			function()
-	-- 				require("flash").treesitter()
-	-- 			end,
-	-- 			desc = "Flash Treesitter",
-	-- 		},
-	-- 		{
-	-- 			"r",
-	-- 			mode = "o",
-	-- 			function()
-	-- 				require("flash").remote()
-	-- 			end,
-	-- 			desc = "Remote Flash",
-	-- 		},
-	-- 		{
-	-- 			"R",
-	-- 			mode = { "o", "x" },
-	-- 			function()
-	-- 				require("flash").treesitter_search()
-	-- 			end,
-	-- 			desc = "Treesitter Search",
-	-- 		},
-	-- 		{
-	-- 			"<c-s>",
-	-- 			mode = { "c" },
-	-- 			function()
-	-- 				require("flash").toggle()
-	-- 			end,
-	-- 			desc = "Toggle Flash Search",
-	-- 		},
-	-- 	},
-	-- },
-
 	{
 		"stevearc/conform.nvim",
 		opts = {},
@@ -448,26 +336,7 @@ require("lazy").setup({
 	{
 		"machakann/vim-swap",
 	},
-
-	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-	--       These are some example plugins that I've included in the kickstart repository.
-	--       Uncomment any of the lines below to enable them.
-	-- require 'kickstart.plugins.autoformat',
-	-- require 'kickstart.plugins.debug',
-
-	-- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-	--    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-	--    up-to-date with whatever is in the kickstart repo.
-	--
-	--    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-	-- { import = 'custom.plugins' },
 }, {})
-
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
-
--- JRu additions
 
 vim.o.scrolloff = 0
 vim.o.cursorlineopt = "number"
@@ -504,13 +373,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_user_command("Browse", "silent !firefox %:p &", {})
-
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
--- NOTE: First, some plugins that don't require any configuration
 
 -- Set relative line numbers
 vim.o.relativenumber = true
@@ -798,10 +660,6 @@ local servers = {
 	},
 }
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
 
@@ -814,66 +672,10 @@ local lspconfig = require("lspconfig")
 mason_lspconfig.setup_handlers({
 	function(server_name)
 		lspconfig[server_name].setup({
-			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = servers[server_name],
 		})
 	end,
-})
-
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
-luasnip.config.setup({})
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete({}),
-		["<CR>"] = cmp.mapping({
-			i = function(fallback)
-				if cmp.visible() and cmp.get_active_entry() then
-					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-				else
-					fallback()
-				end
-			end,
-			s = cmp.mapping.confirm({ select = true }),
-			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.locally_jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-	},
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
