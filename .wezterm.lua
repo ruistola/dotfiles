@@ -30,5 +30,16 @@ config.check_for_updates_interval_seconds = 86400
 config.window_close_confirmation = "NeverPrompt"
 
 config.hide_mouse_cursor_when_typing = true
+config.send_composed_key_when_left_alt_is_pressed = true
+
+config.keys = {
+	-- Turn off the default CMD-m Hide action, allowing CMD-m to
+	-- be potentially recognized and handled by the tab
+	{
+		key = "m",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+}
 
 return config
