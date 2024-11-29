@@ -2,6 +2,7 @@
 
 [core]
     pager = delta
+	ignorecase = false
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
@@ -17,7 +18,7 @@
     diffFilter = delta --color-only
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = merge
 
 [diff]
     colorMoved = default
