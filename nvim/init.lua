@@ -287,6 +287,8 @@ require("lazy").setup({
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
+					go = { "gofmt" },
+
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
 					python = { "isort", "black" },
