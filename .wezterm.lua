@@ -22,7 +22,8 @@ config.scrollback_lines = 9999
 
 config.treat_left_ctrlalt_as_altgr = true
 
-config.font = wezterm.font("SauceCodePro Nerd Font")
+-- config.font = wezterm.font("SauceCodePro Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 17
 
 config.check_for_updates = true
