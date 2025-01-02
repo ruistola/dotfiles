@@ -196,6 +196,18 @@ require("lazy").setup({
 	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
 	{
+		"saghen/blink.compat",
+		-- use the latest release, via version = '*', if you also use the latest release for blink.cmp
+		version = "*",
+		-- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+		lazy = true,
+		-- make sure to set opts so that lazy.nvim calls blink.compat's setup
+		opts = {
+			impersonate_nvim_cmp = true,
+		},
+	},
+
+	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		dependencies = "rafamadriz/friendly-snippets",
