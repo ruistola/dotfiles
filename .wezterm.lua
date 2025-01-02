@@ -23,8 +23,11 @@ config.scrollback_lines = 9999
 config.treat_left_ctrlalt_as_altgr = true
 
 -- config.font = wezterm.font("SauceCodePro Nerd Font")
-config.font = wezterm.font("FiraCode Nerd Font")
-config.font_size = 17
+-- config.font = wezterm.font("FiraCode Nerd Font")
+-- config.font = wezterm.font("Hack Nerd Font")
+-- config.font = wezterm.font("BigBlueTermPlus Nerd Font")
+config.font = wezterm.font("ComicShannsMono Nerd Font")
+config.font_size = 18
 
 config.check_for_updates = true
 config.check_for_updates_interval_seconds = 86400

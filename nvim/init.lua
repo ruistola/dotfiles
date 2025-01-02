@@ -183,102 +183,73 @@ require("lazy").setup({
 	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
 	{
-		"saghen/blink.cmp",
-		lazy = false,
-		-- optional: provides snippets for the snippet source
-		dependencies = "rafamadriz/friendly-snippets",
-		version = "v0.*",
-
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
-		opts = {
-			highlight = { use_nvim_cmp_as_default = true },
-			nerd_font_variant = "normal",
-			trigger = { signature_help = { enabled = true } },
-			windows = { autocomplete = { selection = "manual" } },
-
-			keymap = {
-				show = "<C-space>",
-				hide = "<C-e>",
-				accept = "<Enter>",
-				select_and_accept = {},
-				select_prev = "<S-Tab>",
-				select_next = "<Tab>",
-
-				show_documentation = "<C-space>",
-				hide_documentation = "<C-space>",
-				scroll_documentation_up = "<C-b>",
-				scroll_documentation_down = "<C-f>",
-			},
-		},
+		"hrsh7th/nvim-cmp",
 	},
 
 	{
-		{
-			"AckslD/nvim-neoclip.lua",
-			dependencies = {
-				{ "nvim-telescope/telescope.nvim" },
-			},
-			config = function()
-				require("neoclip").setup({
-					history = 1000,
-					enable_persistent_history = false,
-					length_limit = 1048576,
-					continuous_sync = false,
-					db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
-					filter = nil,
-					preview = true,
-					prompt = nil,
-					default_register = '"',
-					default_register_macros = "q",
-					enable_macro_history = true,
-					content_spec_column = false,
-					disable_keycodes_parsing = false,
-					on_select = {
-						move_to_front = false,
-						close_telescope = true,
-					},
-					on_paste = {
-						set_reg = false,
-						move_to_front = false,
-						close_telescope = true,
-					},
-					on_replay = {
-						set_reg = false,
-						move_to_front = false,
-						close_telescope = true,
-					},
-					on_custom_action = {
-						close_telescope = true,
-					},
-					keys = {
-						telescope = {
-							i = {
-								select = "<cr>",
-								paste = "<c-j>",
-								paste_behind = "<c-k>",
-								replay = "<c-q>", -- replay a macro
-								delete = "<c-d>", -- delete an entry
-								edit = "<c-e>", -- edit an entry
-								custom = {},
-							},
-							n = {
-								select = "<cr>",
-								paste = "p",
-								--- It is possible to map to more than one key.
-								-- paste = { 'p', '<c-p>' },
-								paste_behind = "P",
-								replay = "q",
-								delete = "d",
-								edit = "e",
-								custom = {},
-							},
+		"AckslD/nvim-neoclip.lua",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup({
+				history = 1000,
+				enable_persistent_history = false,
+				length_limit = 1048576,
+				continuous_sync = false,
+				db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+				filter = nil,
+				preview = true,
+				prompt = nil,
+				default_register = '"',
+				default_register_macros = "q",
+				enable_macro_history = true,
+				content_spec_column = false,
+				disable_keycodes_parsing = false,
+				on_select = {
+					move_to_front = false,
+					close_telescope = true,
+				},
+				on_paste = {
+					set_reg = false,
+					move_to_front = false,
+					close_telescope = true,
+				},
+				on_replay = {
+					set_reg = false,
+					move_to_front = false,
+					close_telescope = true,
+				},
+				on_custom_action = {
+					close_telescope = true,
+				},
+				keys = {
+					telescope = {
+						i = {
+							select = "<cr>",
+							paste = "<c-j>",
+							paste_behind = "<c-k>",
+							replay = "<c-q>", -- replay a macro
+							delete = "<c-d>", -- delete an entry
+							edit = "<c-e>", -- edit an entry
+							custom = {},
+						},
+						n = {
+							select = "<cr>",
+							paste = "p",
+							--- It is possible to map to more than one key.
+							-- paste = { 'p', '<c-p>' },
+							paste_behind = "P",
+							replay = "q",
+							delete = "d",
+							edit = "e",
+							custom = {},
 						},
 					},
-				})
-				vim.keymap.set("n", "<leader>o", "<cmd>Telescope neoclip<CR>", { desc = "Telescope Neoclip" })
-			end,
-		},
+				},
+			})
+			vim.keymap.set("n", "<leader>o", "<cmd>Telescope neoclip<CR>", { desc = "Telescope Neoclip" })
+		end,
 	},
 
 	{
@@ -339,11 +310,67 @@ require("lazy").setup({
 	{
 		"machakann/vim-swap",
 	},
-}, {})
+
+	{
+		"rebelot/kanagawa.nvim",
+		opts = {
+			compile = false,
+			undercurl = false,
+			commentStyle = { italic = false },
+			functionStyle = {},
+			keywordStyle = { italic = false },
+			statementStyle = { bold = true },
+			typeStyle = {},
+			transparent = true,
+			dimInactive = false,
+			terminalColors = true,
+			colors = {
+				palette = {},
+				theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+			},
+			theme = "dragon",
+			background = {
+				dark = "dragon",
+				light = "lotus",
+			},
+		},
+	},
+
+	{
+		"sho-87/kanagawa-paper.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			undercurl = false,
+			transparent = true,
+			gutter = false,
+			dimInactive = false,
+			terminalColors = true,
+			commentStyle = { italic = false },
+			functionStyle = { italic = false },
+			keywordStyle = { italic = false, bold = false },
+			statementStyle = { italic = false, bold = true },
+			typeStyle = { italic = false },
+		},
+
+		overrides = function(colors)
+			local theme = colors.theme
+			return {
+				NormalFloat = { bg = "none" },
+				FloatBorder = { fg = theme.ui.fg, bg = "none" },
+				FloatTitle = { bg = "none" },
+				NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+				LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+				MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+			}
+		end,
+	},
+})
 
 vim.o.scrolloff = 0
 vim.o.cursorlineopt = "number"
 vim.o.cursorline = true
+vim.o.background = "dark"
 vim.cmd.colorscheme("habamax")
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
