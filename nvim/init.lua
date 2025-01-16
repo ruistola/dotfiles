@@ -233,20 +233,27 @@ require("lazy").setup({
 				nerd_font_variant = "mono",
 			},
 			completion = {
+				accept = {
+					auto_brackets = {
+						enabled = false,
+					},
+				},
 				list = {
 					selection = "manual",
 				},
 				documentation = {
-					auto_show = true,
+					auto_show = false,
 					auto_show_delay_ms = 500,
 				},
 			},
-			signature = { enabled = true },
+			signature = { enabled = false },
 			keymap = {
 				preset = "default",
-				["<Tab>"] = { "select_next" },
-				["<S-Tab>"] = { "select_prev" },
-				["<CR>"] = { "accept", "fallback" },
+				["<tab>"] = { "hide_documentation", "select_next", "fallback" },
+				["<S-tab>"] = { "hide_documentation", "select_prev", "fallback" },
+				["<C-tab>"] = { "hide_documentation", "fallback" },
+				["<CR>"] = { "hide_documentation", "accept", "fallback" },
+				["<C-space>"] = { "show_documentation", "fallback" },
 			},
 		},
 
