@@ -459,6 +459,19 @@ require("lazy").setup({
 			}
 		end,
 	},
+
+	{
+		"joshuavial/aider.nvim",
+		opts = {
+			auto_manage_context = true,
+			default_bindings = false,
+			debug = false,
+		},
+	},
+
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
+
+	-- end-of-packages
 })
 
 vim.o.scrolloff = 0
