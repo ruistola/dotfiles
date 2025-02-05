@@ -26,6 +26,7 @@ $docker_context\
 $conda\
 [](fg:color_bg3 bg:color_bg1)\
 $time\
+$jobs\
 [ ](fg:color_bg1)\
 $line_break$character"""
 
@@ -34,6 +35,14 @@ palette = 'gruvbox_dark'
 [os]
 disabled = false
 style = "bg:color_orange fg:color_fg0"
+
+[jobs]
+disabled = false
+symbol = '!'
+number_threshold = 99
+symbol_threshold = 1
+format = "[$symbol]($style)"
+style = "bg:color_bg1 fg:color_blue"
 
 [os.symbols]
 Windows = "󰍲"
@@ -60,7 +69,7 @@ RedHatEnterprise = "󱄛"
 show_always = true
 style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
-format = '[ $user ]($style)'
+format = '[ $user $jobs $memory_usage ]($style)'
 
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
