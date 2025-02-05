@@ -466,6 +466,11 @@ require("lazy").setup({
 			auto_manage_context = true,
 			default_bindings = false,
 			debug = false,
+			border = {
+				-- style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				style = "rounded",
+				color = "#fab387",
+			},
 		},
 	},
 
@@ -551,6 +556,41 @@ vim.o.completeopt = "menuone,noselect"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Split and floating window styling
+
+vim.opt.fillchars = {
+	vert = "│", -- Vertical line (could be '│', '▏', etc.)
+	horiz = "─", -- Horizontal line (could be '─', '━', etc.)
+	-- eob = " ", -- Hide the ~ character on empty lines in a buffer (optional)
+}
+
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#fab387", bg = "None" })
+
+local custom_border = {
+	"╭", -- top_left
+	"─", -- top
+	"╮", -- top_right
+	"│", -- right
+	"╯", -- bottom_right
+	"─", -- bottom
+	"╰", -- bottom_left
+	"│", -- left
+}
+
+function _G.OpenCustomFloatExample()
+	local buf = vim.api.nvim_create_buf(false, true) -- Create a scratch buffer
+	local float_opts = {
+		relative = "editor",
+		row = 5,
+		col = 10,
+		width = 60,
+		height = 10,
+		style = "minimal",
+		border = custom_border, -- <--- use our custom border here
+	}
+	vim.api.nvim_open_win(buf, true, float_opts)
+end
 
 -- [[ Basic Keymaps ]]
 
