@@ -12,16 +12,37 @@
     features = line-numbers decorations
     true-color = always
     syntax-theme = Coldark-Dark
-    navigate = true    # use n and N to move between diff sections
+    # use n and N to move between diff sections
+    navigate = true
 
 [interactive]
     diffFilter = delta --color-only
 
+[fetch]
+    prune = true
+    prunetags = true
+
 [merge]
     conflictstyle = merge
 
+[rebase]
+    autostash = true
+
+[push]
+    default = current
+
+[pull]
+    rebase = true
+
+[rerere]
+    enabled = true
+
 [diff]
     colorMoved = default
+    algorithm = histogram
+
+[branch]
+    sort = committerdate
 
 [user]
     name = Juha Ruistola
@@ -36,3 +57,6 @@
 
 [advice]
     addIgnoredFile = false
+
+[maintenance]
+	repo = /Users/ruistola/projs/metaplay/sdk
