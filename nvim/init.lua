@@ -368,7 +368,7 @@ require("lazy").setup({
 				},
 				format_on_save = {
 					-- These options will be passed to conform.format()
-					timeout_ms = 500,
+					timeout_ms = 1500,
 					lsp_format = "fallback",
 				},
 			})
@@ -497,7 +497,7 @@ vim.api.nvim_set_hl(0, "Visual", { bold = false, bg = "#ffaf5f", fg = "#1c1c1c" 
 -- vim.api.nvim_set_hl(0, "CursorLine", { bold = false, bg = "#ffaf5f", fg = "none" })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- Change the error to red text on themeg background
+-- Change the error to red text on theme background
 local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
 vim.api.nvim_set_hl(0, "Error", { fg = "red", bg = bg })
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "red", bg = bg })
