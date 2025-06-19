@@ -1,10 +1,10 @@
 return {
 	{
-		"neovim/nvim-lspconfig",
+		"mason-org/mason-lspconfig.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
-			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
+			{ "mason-org/mason.nvim", config = true },
 			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach", opts = {} },
 			{
 				"folke/lazydev.nvim",
@@ -44,70 +44,19 @@ return {
 				end, { desc = "Format current buffer with LSP" })
 			end
 
-			-- Server configurations
-			local servers = {
-				gopls = {},
-				rust_analyzer = {},
-				ts_ls = {},
-				volar = {},
-				terraformls = {},
-				tflint = {},
-				lua_ls = {
-					Lua = {
-						runtime = { version = "LuaJIT" },
-						diagnostics = { globals = { "vim", "require" } },
-						workspace = {
-							Library = vim.api.nvim_get_runtime_file("", true),
-							checkThirdParty = false,
-						},
-						telemetry = { enable = false },
-					},
-				},
-			}
-
-			-- Setup mason-lspconfig
-			local mason_lspconfig = require("mason-lspconfig")
-			mason_lspconfig.setup({
-				ensure_installed = vim.tbl_keys(servers),
-			})
-
-			local lspconfig = require("lspconfig")
-			mason_lspconfig.setup_handlers({
-				function(server_name)
-					lspconfig[server_name].setup({
-						on_attach = on_attach,
-						settings = servers[server_name],
-					})
-				end,
-			})
-
-			-- TypeScript/Vue specific setup
-			lspconfig.ts_ls.setup({
-				on_attach = on_attach,
+			local vue_ls_path = vim.fn.expand("$MASON/packages/vue-language-server")
+			local vue_plugin_path = vue_ls_path .. "/node_modules/@vue/language-server"
+			require("lspconfig").ts_ls.setup({
 				init_options = {
 					plugins = {
 						{
 							name = "@vue/typescript-plugin",
-							location = require("mason-registry").get_package("vue-language-server"):get_install_path()
-								.. "/node_modules/@vue/language-server",
-							languages = { "javascript", "typescript", "vue" },
+							location = vue_plugin_path,
+							languages = { "vue" },
 						},
 					},
 				},
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"javascript.jsx",
-					"typescript",
-					"typescriptreact",
-					"typescript.tsx",
-					"vue",
-				},
-			})
-
-			-- Volar setup
-			lspconfig.volar.setup({
-				on_attach = on_attach,
+				filetypes = { "typescript", "javascript", "vue" },
 			})
 		end,
 	},
