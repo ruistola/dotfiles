@@ -44,9 +44,18 @@ return {
 				end, { desc = "Format current buffer with LSP" })
 			end
 
+			local lspconfig = require("lspconfig")
+
+			lspconfig.gopls.setup({
+				on_attach = on_attach,
+				cmd = { "gopls" },
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			})
+
 			local vue_ls_path = vim.fn.expand("$MASON/packages/vue-language-server")
 			local vue_plugin_path = vue_ls_path .. "/node_modules/@vue/language-server"
-			require("lspconfig").ts_ls.setup({
+			lspconfig.ts_ls.setup({
+				on_attach = on_attach,
 				init_options = {
 					plugins = {
 						{
