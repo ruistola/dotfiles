@@ -2,6 +2,8 @@ return {
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- Disable lazy loading to avoid textlock issues when opening nvim with a directory argument
+		lazy = false,
 		keys = {
 			{ "<leader>-", "<cmd>Oil<cr>", desc = "File Explorer" },
 		},
