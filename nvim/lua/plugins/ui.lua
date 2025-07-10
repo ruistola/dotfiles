@@ -36,7 +36,7 @@ return {
 						shorting_target = 45,
 						symbols = {
 							modified = "[+]",
-							readonly = "[-]",
+							readonly = "[R]",
 							unnamed = "[No Name]",
 							newfile = "[New]",
 						},
