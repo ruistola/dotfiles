@@ -58,4 +58,23 @@ return {
 		},
 	},
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
+	{
+		"code-biscuits/nvim-biscuits",
+		lazy = false,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		keys = {
+			{
+				"<leader>bb",
+				function()
+					local nvim_biscuits = require("nvim-biscuits")
+					nvim_biscuits.BufferAttach()
+					nvim_biscuits.toggle_biscuits()
+				end,
+				mode = "n",
+				desc = "Enable Biscuits",
+			},
+		},
+	},
 }
