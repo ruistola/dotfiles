@@ -15,6 +15,7 @@ return {
 		cmd = "Telescope",
 		keys = {
 			{ "<leader>?", "<cmd>Telescope oldfiles<cr>", desc = "[?] Find recently opened files" },
+			{ "<leader>k", "<cmd>Telescope keymaps<cr>", desc = "[k] Search [K]eymaps" },
 			{ "<leader><space>", "<cmd>Telescope buffers<cr>", desc = "[ ] Find existing buffers" },
 			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Search [G]it [F]iles" },
 			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
