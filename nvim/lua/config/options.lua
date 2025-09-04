@@ -29,6 +29,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = "menuone,noselect"
 vim.o.termguicolors = true
+vim.o.swapfile = false
 
 -- Split chars
 vim.opt.fillchars = {
