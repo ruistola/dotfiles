@@ -39,6 +39,14 @@ return {
 				accept = {
 					auto_brackets = {
 						enabled = false,
+						-- kind_resolution = {
+						-- 	enabled = true,
+						-- 	blocked_filetypes = { "go" },
+						-- },
+						-- semantic_token_resolution = {
+						-- 	enabled = true,
+						-- 	blocked_filetypes = { "go" },
+						-- },
 					},
 				},
 				list = {

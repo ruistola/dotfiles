@@ -52,6 +52,21 @@ return {
 				on_attach = on_attach,
 				cmd = { "gopls" },
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				settings = {
+					gopls = {
+						usePlaceholders = false,
+						completeFunctionCalls = false,
+					},
+				},
+				capabilities = vim.tbl_deep_extend("force", capabilities or {}, {
+					textDocument = {
+						completion = {
+							completionItem = {
+								snippetSupport = false,
+							},
+						},
+					},
+				}),
 			})
 
 			local vue_ls_path = vim.fn.expand("$MASON/packages/vue-language-server")
