@@ -31,6 +31,12 @@ return {
 		},
 		version = "*",
 		opts = {
+			sources = {
+				default = { "lsp", "path", "buffer", "codecompanion" },
+				per_filetype = {
+					codecompanion = { "codecompanion" },
+				},
+			},
 			appearance = {
 				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",

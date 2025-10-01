@@ -15,6 +15,7 @@ return {
 					"html",
 					"lua",
 					"markdown",
+					"markdown_inline",
 					"pug",
 					"python",
 					"rust",
