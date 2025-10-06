@@ -1,10 +1,30 @@
 return {
 	"olimorris/codecompanion.nvim",
+	init = function()
+		vim.g.codecompanion_yolo_mode = true
+	end,
 	opts = {
 		memory = {
+			default = {
+				description = "Collection of common files for all projects",
+				files = {
+					".clinerules",
+					".cursorrules",
+					".goosehints",
+					".rules",
+					".windsurfrules",
+					".github/copilot-instructions.md",
+					"AGENT.md",
+					"AGENTS.md",
+					{ path = "CLAUDE.md", parser = "claude" },
+					{ path = "CLAUDE.local.md", parser = "claude" },
+					{ path = "~/.claude/CLAUDE.md", parser = "claude" },
+				},
+			},
 			opts = {
 				chat = {
 					enabled = true,
+					default_memory = { "default", "claude" },
 					default_params = "watch",
 				},
 			},
@@ -18,12 +38,20 @@ return {
 				},
 			},
 		},
-		strategies = {
+		display = {
 			chat = {
+				intro_message = "Press ? for options",
+				auto_scroll = true,
 				fold_context = true,
 				fold_reasoning = true,
+				show_token_count = false,
+				show_tools_processing = true,
+			},
+		},
+		strategies = {
+			chat = {
 				adapter = "anthropic",
-				model = "claude-opus-4-1-20250805",
+				model = "claude-sonnet-4-5",
 				variables = {
 					["buffer"] = {
 						opts = {
@@ -33,6 +61,8 @@ return {
 				},
 				tools = {
 					opts = {
+						auto_submit_errors = true,
+						auto_submit_success = true,
 						default_tools = {
 							"full_stack_dev",
 						},
@@ -41,11 +71,11 @@ return {
 			},
 			inline = {
 				adapter = "anthropic",
-				model = "claude-opus-4-1-20250805",
+				model = "claude-sonnet-4-5",
 			},
 			cmd = {
 				adapter = "anthropic",
-				model = "claude-opus-4-1-20250805",
+				model = "claude-sonnet-4-5",
 			},
 		},
 		opts = {
