@@ -5,22 +5,6 @@ return {
 	end,
 	opts = {
 		memory = {
-			default = {
-				description = "Collection of common files for all projects",
-				files = {
-					".clinerules",
-					".cursorrules",
-					".goosehints",
-					".rules",
-					".windsurfrules",
-					".github/copilot-instructions.md",
-					"AGENT.md",
-					"AGENTS.md",
-					{ path = "CLAUDE.md", parser = "claude" },
-					{ path = "CLAUDE.local.md", parser = "claude" },
-					{ path = "~/.claude/CLAUDE.md", parser = "claude" },
-				},
-			},
 			opts = {
 				chat = {
 					enabled = true,
@@ -44,14 +28,14 @@ return {
 				auto_scroll = true,
 				fold_context = true,
 				fold_reasoning = true,
-				show_token_count = false,
+				show_settings = true,
+				show_token_count = true,
 				show_tools_processing = true,
 			},
 		},
 		strategies = {
 			chat = {
 				adapter = "anthropic",
-				model = "claude-sonnet-4-5",
 				variables = {
 					["buffer"] = {
 						opts = {
@@ -71,11 +55,9 @@ return {
 			},
 			inline = {
 				adapter = "anthropic",
-				model = "claude-sonnet-4-5",
 			},
 			cmd = {
 				adapter = "anthropic",
-				model = "claude-sonnet-4-5",
 			},
 		},
 		opts = {
@@ -86,7 +68,25 @@ return {
 				opts = {
 					show_defaults = false,
 				},
-				anthropic = "anthropic",
+				anthropic = function()
+					return require("codecompanion.adapters").extend("anthropic", {
+						schema = {
+							model = {
+								choices = {
+									["claude-sonnet-4-5-20250929"] = {
+										nice_name = "Claude Sonnet 4.5",
+										opts = { can_reason = true, has_vision = true },
+									},
+								},
+								default = "claude-sonnet-4-5-20250929",
+							},
+							temperature = { default = 0 },
+							extended_thinking = { default = true },
+							thinking_budget = { default = 64000 },
+							max_tokens = { default = 128000 },
+						},
+					})
+				end,
 			},
 		},
 	},
