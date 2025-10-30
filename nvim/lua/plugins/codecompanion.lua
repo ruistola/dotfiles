@@ -82,8 +82,8 @@ return {
 							},
 							temperature = { default = 0 },
 							extended_thinking = { default = true },
-							thinking_budget = { default = 64000 },
-							max_tokens = { default = 128000 },
+							thinking_budget = { default = 32000 },
+							max_tokens = { default = 64000 },
 						},
 					})
 				end,
