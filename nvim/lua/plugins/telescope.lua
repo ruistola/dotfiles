@@ -37,6 +37,18 @@ return {
 		config = function()
 			require("telescope").setup({
 				defaults = {
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--hidden",
+						"--glob",
+						"!**/.git/*",
+					},
 					sorting_strategy = "ascending",
 					layout_strategy = "vertical",
 					layout_config = {
@@ -71,6 +83,9 @@ return {
 				pickers = {
 					buffers = {
 						sort_mru = true,
+					},
+					find_files = {
+						hidden = true,
 					},
 				},
 			})
