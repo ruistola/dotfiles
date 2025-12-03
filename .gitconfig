@@ -46,7 +46,10 @@
 
 [user]
     name = Juha Ruistola
-    email = juha.ruistola@metaplay.io
+    email = ruistola@gmail.com
+
+[includeIf "gitdir:~/projs/metaplay/"]
+    path = ~/projs/metaplay/.gitconfig
 
 [alias]
     co = checkout
