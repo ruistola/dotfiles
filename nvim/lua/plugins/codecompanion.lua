@@ -77,6 +77,10 @@ return {
 										nice_name = "Claude Sonnet 4.5",
 										opts = { can_reason = true, has_vision = true },
 									},
+									["claude-opus-4-5-20251101"] = {
+										nice_name = "Claude Opus 4.5",
+										opts = { can_reason = true, has_vision = true },
+									},
 								},
 								default = "claude-sonnet-4-5-20250929",
 							},
