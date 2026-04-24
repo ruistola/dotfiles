@@ -3,6 +3,7 @@
 [core]
     pager = delta
 	ignorecase = false
+    sshCommand = ssh -i ~/.ssh/id_ed25519_ruistola -o IdentitiesOnly=yes
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
@@ -51,7 +52,7 @@
 # Work user name and email under work directory
 # (overrides the one set above)
 
-[includeIf "gitdir:~/projs/war"]
+[includeIf "gitdir:~/projs/war/"]
     path = ~/projs/war/.gitconfig
 
 [alias]
