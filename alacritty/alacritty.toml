@@ -12,6 +12,9 @@ startup_mode = "Maximized"
 dynamic_title = true
 # option_as_alt = "Both"
 
+[font]
+size = 17.0
+
 [mouse]
 hide_when_typing = true
 
@@ -51,9 +54,6 @@ foreground = "#ebdbb2"
 
 [env]
 TERM = "xterm-256color"
-
-[font]
-size = 18.0
 
 [font.bold]
 family = "ComicShannsMono Nerd Font"
