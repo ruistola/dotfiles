@@ -48,8 +48,8 @@
     name = Juha Ruistola
     email = ruistola@gmail.com
 
-[includeIf "gitdir:~/projs/metaplay/"]
-    path = ~/projs/metaplay/.gitconfig
+[includeIf "gitdir:~/w"]
+    path = ~/w/.gitconfig
 
 [alias]
     co = checkout
@@ -63,3 +63,5 @@
 
 [maintenance]
 	repo = /Users/ruistola/projs/metaplay/sdk
+[credential]
+	helper = osxkeychain
