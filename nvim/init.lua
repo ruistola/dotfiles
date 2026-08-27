@@ -21,6 +21,7 @@ vim.pack.add({
   "https://github.com/kdheepak/lazygit.nvim",
   "https://github.com/tpope/vim-fugitive", -- Gitsigns (optional)
   "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/OXY2DEV/markview.nvim", -- configured in plugin/markview.lua
   -- "https://github.com/tpope/vim-rhubarb"
   -- "https://github.com/stevearc/conform.nvim",
   -- "https://github.com/RRethy/nvim-align",
