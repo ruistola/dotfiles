@@ -18,18 +18,21 @@ vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/OXY2DEV/markview.nvim",
   "https://github.com/stevearc/conform.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
+  "https://github.com/lukas-reineke/indent-blankline.nvim",
+
+  -- custom colorschemes
+
   "https://github.com/ribru17/bamboo.nvim",
   "https://github.com/AlexvZyl/nordic.nvim",
   "https://github.com/sainnhe/everforest",
-  -- "https://github.com/tpope/vim-rhubarb"
-  -- "https://github.com/RRethy/nvim-align",
-  -- "https://github.com/machakann/vim-swap",
-  -- "https://github.com/",
+  "https://github.com/ilof2/posterpole.nvim",
+  "https://github.com/drewxs/ash.nvim",
 })
 
--- Colorscheme (after plugins to include custom colorschemes)
+-- Set colorscheme (after plugins to include custom colorschemes)
 
-vim.cmd("colorscheme nordic")
+vim.cmd("colorscheme everforest")
 
 -- LSP (after plugins so nvim-lspconfig's shipped lsp/*.lua base configs are on
 -- the runtimepath before we enable/override servers like vtsls and eslint).
