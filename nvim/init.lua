@@ -2,11 +2,10 @@
 require("options")
 require("keymaps")
 require("autocmds")
-require("lsp")
 
 -- Colorscheme
 
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme catppuccin")
 
 -- Plugins (dependents listed in comments)
 
@@ -22,9 +21,13 @@ vim.pack.add({
   "https://github.com/tpope/vim-fugitive", -- Gitsigns (optional)
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/OXY2DEV/markview.nvim", -- configured in plugin/markview.lua
+  "https://github.com/stevearc/conform.nvim", -- configured in plugin/conform.lua
   -- "https://github.com/tpope/vim-rhubarb"
-  -- "https://github.com/stevearc/conform.nvim",
   -- "https://github.com/RRethy/nvim-align",
   -- "https://github.com/machakann/vim-swap",
   -- "https://github.com/",
 })
+
+-- LSP (after plugins so nvim-lspconfig's shipped lsp/*.lua base configs are on
+-- the runtimepath before we enable/override servers like vtsls and eslint).
+require("lsp")
