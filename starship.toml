@@ -1,16 +1,17 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+scan_timeout = 1000
 command_timeout = 5000
 
 format = """
 [](color_orange)\
 $os\
-$username\
-[](bg:color_yellow fg:color_orange)\
 $directory\
-[](fg:color_yellow bg:color_aqua)\
+[](fg:color_orange bg:color_yellow)\
 $git_branch\
 $git_status\
+[](fg:color_yellow bg:color_aqua)\
+$aws\
 [](fg:color_aqua bg:color_blue)\
 $c\
 $rust\
@@ -24,24 +25,37 @@ $python\
 [](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
-[](fg:color_bg3 bg:color_bg1)\
 $jobs\
-[ ](fg:color_bg1)\
+[](bg: color_bg3)\
 $line_break$character"""
 
 palette = 'gruvbox_dark'
 
 [os]
+style = "bg:color_orange"
 disabled = false
-style = "bg:color_orange fg:color_fg0"
+format = "[$symbol ]($style)"
+
+[directory]
+style = "bg:color_orange"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+# "Documents" = "󰈙 "
+# "Downloads" = " "
+# "Music" = "󰝚 "
+# "Pictures" = " "
+# "Developer" = "󰲋 "
 
 [jobs]
+style = "bg:color_bg3"
+format = "[ $symbol]($style)"
 disabled = false
 symbol = '!'
 number_threshold = 99
 symbol_threshold = 1
-format = "[$symbol]($style)"
-style = "bg:color_bg1 fg:color_blue"
 
 [os.symbols]
 Windows = "󰍲"
@@ -64,33 +78,30 @@ Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
-[username]
-show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
-format = '[ $user $jobs $memory_usage ]($style)'
-
-[directory]
-style = "fg:color_fg0 bg:color_yellow"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
-
-[directory.substitutions]
-# "Documents" = "󰈙 "
-# "Downloads" = " "
-# "Music" = "󰝚 "
-# "Pictures" = " "
-# "Developer" = "󰲋 "
-
 [git_branch]
 symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
+style = "bg:color_yellow"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
+style = "bg:color_yellow"
+format = '[($all_status$ahead_behind )]($style)'
+
+[aws]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+format = '[ $symbol( $profile )]($style)'
+symbol = ' '
+expiration_symbol = '!'
+[aws.profile_aliases]
+"wartsila-mywartsila-dev/WartsilaViewOnly" = "dev/viewonly"
+"wartsila-mywartsila-dev/WartsilaDeveloper" = "dev/developer"
+"wartsila-mywartsila-dev/WartsilaAdmin"= "dev/admin"
+"wartsila-mywartsila-qa/WartsilaViewOnly" = "qa/viewonly"
+"wartsila-mywartsila-qa/WartsilaDeveloper" = "qa/developer"
+"wartsila-mywartsila-qa/WartsilaAdmin" = "qa/admin"
+"wartsila-mywartsila-prod/WartsilaViewOnly" = "prod/viewonly"
+"wartsila-mywartsila-prod/WartsilaDeveloper" = "prod/developer"
+"wartsila-mywartsila-prod/WartsilaAdmin" = "prod/admin"
 
 [nodejs]
 symbol = ""
