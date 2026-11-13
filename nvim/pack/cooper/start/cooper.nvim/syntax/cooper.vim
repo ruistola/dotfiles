@@ -19,9 +19,14 @@ syn case match
 syn keyword cooperTodo contained TODO FIXME XXX NOTE
 syn match   cooperComment "#.*$" contains=cooperTodo,@Spell
 
-" Strings ----------------------------------------------------------------
-syn match  cooperEscape contained +\\[ntr0\\"']+
-syn region cooperString start=+"+ skip=+\\.+ end=+"+ contains=cooperEscape,@Spell
+" Strings and runes -----------------------------------------------------
+syn match  cooperEscape contained +\\\%(u{\x\+}\|[ntr0\\"'{]\)+
+syn region cooperString start=+"+ skip=+\\.+ end=+"+ contains=cooperEscape,cooperHole,@Spell
+" A hole `{expr}` in a string holds ordinary code. It may contain itself so that
+" braces nested inside the expression balance.
+syn region cooperHole contained matchgroup=cooperHoleDelim start=+{+ end=+}+
+      \ contains=ALLBUT,cooperDelimiter,cooperTodo,cooperEscape
+syn match  cooperRune +'\%(\\\%(u{\x\+}\|.\)\|[^'\\]\)'+ contains=cooperEscape
 
 " Numbers ----------------------------------------------------------------
 syn match cooperNumber "\<[0-9]\(_\?[0-9]\)*\>"
@@ -31,14 +36,14 @@ syn match cooperFloat  "\<[0-9]\(_\?[0-9]\)*\.[0-9]\(_\?[0-9]\)*\([eE][+-]\?[0-9
 syn match cooperFloat  "\<[0-9]\(_\?[0-9]\)*[eE][+-]\?[0-9]\(_\?[0-9]\)*\>"
 
 " Keywords ---------------------------------------------------------------
-syn keyword cooperKeyword     func struct oneof let use as
+syn keyword cooperKeyword     func struct union type extern let use as thread
 syn keyword cooperConditional if then else match with
 syn keyword cooperRepeat      for in do while until repeat
-syn keyword cooperStatement   break continue return
-syn keyword cooperWordOp      and or xor
+syn keyword cooperStatement   break continue return defer
+syn keyword cooperWordOp      and or xor is
 syn keyword cooperBoolean     true false
 syn keyword cooperNil         nil
-syn keyword cooperPrimitive   i8 i16 i32 i64 u8 u16 u32 u64 f32 f64 bool string
+syn keyword cooperPrimitive   i8 i16 i32 i64 u8 u16 u32 u64 f32 f64 bool string rune
 
 " Names ------------------------------------------------------------------
 " A PascalCase identifier is a type, a type parameter, or a sum-type variant.
@@ -55,17 +60,21 @@ syn match cooperFuncDef   "\%(\<func\s\+\)\@<=[A-Za-z_][A-Za-z0-9_]*"
 " Operators and punctuation ----------------------------------------------
 syn match cooperDelimiter "[,;:(){}\[\]]"
 syn match cooperOperator  "[-+*/%!<>=]"
-syn match cooperOperator  "[-+*/!<>=]="
+syn match cooperOperator  "[-+*/%!<>=]="
+syn match cooperOperator  "<<\|>>"
 syn match cooperOperator  ":="
 syn match cooperOperator  "=>"
 syn match cooperOperator  "\.\.=\?"
-syn match cooperOperator  "[&^]"
+syn match cooperOperator  "\.\.\."
+syn match cooperOperator  "[&^|]"
 
 " Links ------------------------------------------------------------------
 hi def link cooperTodo        Todo
 hi def link cooperComment     Comment
 hi def link cooperEscape      SpecialChar
 hi def link cooperString      String
+hi def link cooperHoleDelim   Special
+hi def link cooperRune        Character
 hi def link cooperNumber      Number
 hi def link cooperFloat       Float
 hi def link cooperKeyword     Keyword
