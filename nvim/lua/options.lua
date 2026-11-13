@@ -19,6 +19,7 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.opt.wildmode = { "lastused", "full" }
 -- vim.opt.wrap = false
 vim.opt.autocomplete = true
+vim.opt.autocompletedelay = 1000
 vim.opt.background = "dark"
 vim.opt.breakindent = true
 vim.opt.clipboard = "unnamedplus"

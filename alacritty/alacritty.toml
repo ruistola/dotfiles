@@ -72,10 +72,6 @@ family = "ComicShannsMono Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]
-chars = "<"
-key = "§"
-
-[[keyboard.bindings]]
 chars = ">"
 key = "°"
 mods = "Shift"
@@ -95,10 +91,10 @@ chars = "|"
 key = "§"
 mods = "Alt"
 
-[[keyboard.bindings]]
-chars = "\\"
-key = "+"
-mods = "Alt"
+# [[keyboard.bindings]]
+# chars = "\\"
+# key = "+"
+# mods = "Alt"
 
 #
 # [[keyboard.bindings]]

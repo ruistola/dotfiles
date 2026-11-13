@@ -32,7 +32,7 @@ vim.pack.add({
 
 -- Set colorscheme (after plugins to include custom colorschemes)
 
-vim.cmd("colorscheme everforest")
+vim.cmd("colorscheme nordic")
 
 -- LSP (after plugins so nvim-lspconfig's shipped lsp/*.lua base configs are on
 -- the runtimepath before we enable/override servers like vtsls and eslint).

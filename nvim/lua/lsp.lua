@@ -3,32 +3,6 @@
 -- runtimepath lsp/ files (see `:h vim.lsp.config`), so we only specify the
 -- extras we care about and inherit the robust monorepo/root-detection defaults.
 
--- vtsls: TypeScript/JavaScript. Enable inlay hints for nicer editing.
-vim.lsp.config("vtsls", {
-  settings = {
-    typescript = {
-      inlayHints = {
-        parameterNames = { enabled = "literals" },
-        parameterTypes = { enabled = true },
-        variableTypes = { enabled = false },
-        propertyDeclarationTypes = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        enumMemberValues = { enabled = true },
-      },
-    },
-    javascript = {
-      inlayHints = {
-        parameterNames = { enabled = "literals" },
-        parameterTypes = { enabled = true },
-        variableTypes = { enabled = false },
-        propertyDeclarationTypes = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        enumMemberValues = { enabled = true },
-      },
-    },
-  },
-})
-
 -- eslint's fix-on-save is wired in the LspAttach handler below (overriding
 -- on_attach here would recurse, since vim.lsp.config.eslint resolves to the
 -- merged config). lspconfig's base config still provides :LspEslintFixAll.
@@ -49,10 +23,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local methods = vim.lsp.protocol.Methods
     if client:supports_method(methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-    -- Turn on inlay hints for servers that provide them (gopls, vtsls).
-    if client:supports_method(methods.textDocument_inlayHint) then
-      vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
     end
     -- ESLint: auto-apply fixes on save (command defined by lspconfig's base config).
     if client.name == "eslint" then
